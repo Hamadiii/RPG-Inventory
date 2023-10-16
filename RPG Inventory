@@ -1,0 +1,60 @@
+import os, time
+items = []
+
+try:
+  f = open("Inventory.txt", "r")
+  items = eval(f.read())
+  f.close()
+except:
+  print("that file doesn't exist yet! Let's create it!")
+  
+
+def add():
+  os.system("clear")
+  item = input("Input the item to add:\n>").strip().capitalize()
+  items.append(item)
+  print(f"{item} has been added to your inventory!")
+  time.sleep(2)
+  os.system("clear")
+
+def remove():
+  os.system("clear")
+  remove_item = input("Input the item to remove:\n>").strip().capitalize()
+  if remove_item in items:
+    items.remove(remove_item)
+    print(f"{remove_item} has been removed from your inventory!")
+    time.sleep(2)
+    os.system("clear")
+  else:
+    print("That item was never in the inventory")
+    time.sleep(2)
+    os.system("clear")
+
+def view():
+  os.system("clear")
+  #for item in items:
+  #  print(item, end= " | ")
+  view_item = input("Input the item to view:\n>").strip().capitalize()
+  if view_item in items:
+    counts = items.count(view_item)
+    print(f"You have {counts} {view_item} in your Inventory!")
+  else:
+    print(f"{view_item} is not in Inventory!")
+  print()
+
+
+while True:
+  print()
+  title = "🌟RPG Inventory🌟"
+  print(f"{title: ^50}")
+  Menu = input("1- Add\n2- Remove\n3- View\n>").strip()
+  if Menu == "1":
+    add()
+  elif Menu == "2":
+    remove()
+  elif Menu == "3":
+    view()
+
+  f = open("Inventory.txt", "w")
+  f.write(str(items))
+  f.close()
