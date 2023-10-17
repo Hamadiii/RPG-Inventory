@@ -33,15 +33,21 @@ def remove():
 
 def view():
   os.system("clear")
-  #for item in items:
-  #  print(item, end= " | ")
-  view_item = input("Input the item to view:\n>").strip().capitalize()
-  if view_item in items:
-    counts = items.count(view_item)
-    print(f"You have {counts} {view_item} in your Inventory!")
-  else:
-    print(f"{view_item} is not in Inventory!")
-  print()
+  view_menu = input("1- Input the item to view\n2- View all\n>").strip().capitalize()
+  if view_menu == "1":
+    view_item = input("Input the item to view:\n>").strip().capitalize()
+    if view_item in items:
+      counts = items.count(view_item)
+      print(f"You have {counts} {view_item} in your Inventory!")
+    else:
+      print(f"{view_item} is not in Inventory!")
+    print()
+  elif view_menu == "2":
+    seen = []
+    for item in items:
+      if item not in seen:
+        print(f"{item} {items.count(item)}")
+        seen.append(item)
 
 
 while True:
